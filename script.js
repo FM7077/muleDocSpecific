@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Specific mule runtime doc version
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.0
 // @description  Change mule runtime doc version to specific version
 // @author       FM7077
 // @match        *://docs.mulesoft.com/*
@@ -9,6 +9,10 @@
 // ==/UserScript==
 
 var specificVersion = "4.1"
+let storagedVersion = localStorage.getItem('storagedVersion')
+if(storagedVersion !== null){
+    specificVersion = storagedVersion
+}
 
 let myDiv = document.createElement('div');
 myDiv.setAttribute("id", "myDiv");
@@ -67,5 +71,6 @@ function changeListVersion(specificVersion) {
 
 function Change(){
     specificVersion = document.getElementById("myInput").value
+    localStorage.setItem('storagedVersion', specificVersion);
     changeListVersion(specificVersion)
 }
